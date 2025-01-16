@@ -441,27 +441,13 @@ end
                 end)
             end           
 
-            draggable(menu.BG)
-                InputService.MouseIconEnabled = false
-                local Cursor = Drawing.new('Triangle');Cursor.Thickness = 1;Cursor.Filled = true;Cursor.Visible = true;Cursor.ZIndex = math.huge;local CursorOutline = Drawing.new('Triangle');CursorOutline.Thickness = 1;CursorOutline.Filled = false;CursorOutline.Color = Color3.new(202, 82, 147);CursorOutline.Visible = true;CursorOutline.ZIndex = math.huge
-                function cursorupdate()
-                    local mPos = InputService:GetMouseLocation();
-                    Cursor.Color = library.Colors.libColor;Cursor.PointA = Vector2.new(mPos.X, mPos.Y);Cursor.PointB = Vector2.new(mPos.X + 16, mPos.Y + 6);Cursor.PointC = Vector2.new(mPos.X + 6, mPos.Y + 16) CursorOutline.PointA = Cursor.PointA;CursorOutline.PointB = Cursor.PointB;CursorOutline.PointC = Cursor.PointC;RunService.RenderStepped:Wait() end task.spawn(function() while true do cursorupdate() end
-                end)
-                InputService.InputEnded:Connect(function(key)
-                if key.KeyCode == library.keybind then 
-                    menu.Enabled = not menu.Enabled;library.scrolling = false;
-                    library.colorpicking = false;
-                    Cursor.Visible = not Cursor.Visible;
-                    InputService.MouseIconEnabled = not InputService.MouseIconEnabled;
-                    CursorOutline.Visible = not CursorOutline.Visible; 
-                    for i,v in next, 
-                        library.toInvis 
-                        do v.Visible = false 
-                        end 
-                    end
-                end)
-
+            function draggable(a)local b=game:GetService("UserInputService")local c;local d;local e;local f;local g=0.25;local h=TweenInfo.new(g,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)local function i(j)if not library.colorpicking then local k=j.Position-e;local l=UDim2.new(f.X.Scale,f.X.Offset+k.X,f.Y.Scale,f.Y.Offset+k.Y)local m=TweenService:Create(a,h,{Position=l})m:Play()end end;a.InputBegan:Connect(function(j)if j.UserInputType==Enum.UserInputType.MouseButton1 or j.UserInputType==Enum.UserInputType.Touch then c=true;e=j.Position;f=a.Position;j.Changed:Connect(function()if j.UserInputState==Enum.UserInputState.End then c=false end end)end end)a.InputChanged:Connect(function(j)if j.UserInputType==Enum.UserInputType.MouseMovement or j.UserInputType==Enum.UserInputType.Touch then d=j end end)b.InputChanged:Connect(function(j)if j==d and c then i(j)end end)end draggable(menu.bg)
+            InputService.MouseIconEnabled = false
+            local Cursor = Drawing.new('Triangle');Cursor.Thickness = 1;Cursor.Filled = true;Cursor.Visible = true;Cursor.ZIndex = math.huge;local CursorOutline = Drawing.new('Triangle');CursorOutline.Thickness = 1;CursorOutline.Filled = false;CursorOutline.Color = Color3.new(255, 255, 255);CursorOutline.Visible = true;CursorOutline.ZIndex = math.huge
+            function cursorupdate()
+               local mPos = InputService:GetMouseLocation();
+               Cursor.Color = library.Colors.libColor;Cursor.PointA = Vector2.new(mPos.X, mPos.Y);Cursor.PointB = Vector2.new(mPos.X + 16, mPos.Y + 6);Cursor.PointC = Vector2.new(mPos.X + 6, mPos.Y + 16) CursorOutline.PointA = Cursor.PointA;CursorOutline.PointB = Cursor.PointB;CursorOutline.PointC = Cursor.PointC;RunService.RenderStepped:Wait() end task.spawn(function() while true do cursorupdate() end
+           end)
                 LPH_NO_VIRTUALIZE(function()
                 function library:Tween(...) TweenService:Create(...):Play() end
                     function library:addTab(name,image)
